@@ -20,7 +20,7 @@ This project demonstrates advanced app structure, local persistence, reactive UI
 ---
 
 ## 🧠 Project Structure
-
+```
 lib/
 ├── core/
 │ ├── constants/ # Game constants (board size, colors, etc.)
@@ -50,7 +50,7 @@ lib/
 │ │ ├── controller/ # Handles score loading and clearing
 │
 └── main.dart # Entry point, route setup, GetMaterialApp
-
+```
 ---
 
 ## ⚙️ Architecture Overview
