@@ -67,7 +67,7 @@ class HomeView extends GetView<HomeViewController> {
             
             const SizedBox(height: 16),
             OutlinedButton(
-              onPressed: controller.onOpenSettings,
+              onPressed: (){},
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 48,
