@@ -93,8 +93,9 @@ The app follows **Clean Architecture**, separating layers to keep logic independ
 
 ## 🏗️ Installation
 
-### 1️⃣ Clone the repo
 ```bash
+
+1️⃣ Clone the repo
 git clone git@github.com:Kilder-M/tetris_game.git
 cd flutter_tetris
 
