@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tetris_game/presentation/controller/home_controller.dart';
+import 'package:tetris_game/presentation/home/controller/home_controller.dart';
 
 class HomeView extends GetView<HomeViewController> {
   const HomeView({super.key});

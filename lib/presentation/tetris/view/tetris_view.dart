@@ -6,8 +6,8 @@ import 'package:tetris_game/presentation/Widgets/tetris_retro_button.dart';
 import 'package:tetris_game/presentation/tetris/controller/tetris_view_controller.dart';
 import 'package:tetris_game/core/enums/game_status.dart';
 
-class GameView extends GetView<TetrisViewController> {
-  const GameView({super.key});
+class TetrisView extends GetView<TetrisViewController> {
+  const TetrisView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class _ScoreAndHighScoreRow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "Score: ${controller.score.value}",
+              "Score: ${controller.score.value.points}",
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Text(

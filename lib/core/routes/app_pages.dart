@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:tetris_game/presentation/bindings/home_bindings.dart';
+import 'package:tetris_game/presentation/home/bindings/home_bindings.dart';
 import 'package:tetris_game/presentation/home/home_view.dart';
-import 'package:tetris_game/presentation/tetris/bindings/game_view_binding.dart';
-import 'package:tetris_game/presentation/tetris/view/game_view.dart';
+import 'package:tetris_game/presentation/tetris/bindings/tetris_view_binding.dart';
+import 'package:tetris_game/presentation/tetris/view/tetris_view.dart';
 
 part 'app_routes.dart';
 
@@ -14,8 +14,8 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.gameView,
-      page: () => const GameView(),
-      binding: GameViewBinding(),
+      page: () => const TetrisView(),
+      binding: TetrisViewBindings(),
     ),
      GetPage(
       name: _Paths.home,

@@ -5,8 +5,15 @@ import 'package:get/get.dart';
 import 'package:tetris_game/core/constants/tetromino_constants.dart';
 import 'package:tetris_game/core/models/piece.dart';
 import 'package:tetris_game/core/enums/game_status.dart';
+import 'package:tetris_game/domain/entities/score.dart';
+import 'package:tetris_game/domain/usecases/score/get_highscores_usecase.dart';
+import 'package:tetris_game/domain/usecases/score/save_highscore_usecase.dart';
 
 class TetrisViewController extends GetxController {
+  final GetHighScoresUseCase getHighScoresUseCase =
+      Get.find<GetHighScoresUseCase>();
+  final SaveScoreUseCase saveScoreUseCase = Get.find<SaveScoreUseCase>();
+
   // Reactive board
   final RxList<RxList<Color?>> board = RxList.generate(
     boardRows,
@@ -21,19 +28,28 @@ class TetrisViewController extends GetxController {
 
   Timer? timer;
 
-  RxInt score = 0.obs;
+  //ininitializing score and highscore
+  Rx<Score> score = Score(points: 0, createdAt: DateTime.now()).obs;
   RxInt highScore = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     startGame();
+    
+  }
+
+  void initializeHighScore() async {
+    highScore.value = await getHighScore();
   }
 
   void startGame() {
+
+    //initialize high score from storage
+    initializeHighScore();
     
     //clear previous game score
-    score.value = 0;
+    score.value = Score(points: 0, createdAt: DateTime.now());
 
     // Clear board
     for (int y = 0; y < boardRows; y++) {
@@ -77,6 +93,8 @@ class TetrisViewController extends GetxController {
       if (_isCollision(currentPiece.value!)) {
         status.value = GameStatus.gameOver;
         timer?.cancel();
+        // Save high score just when game is over
+        saveHighScore();
       }
     }
   }
@@ -144,15 +162,33 @@ class TetrisViewController extends GetxController {
 
     if (linesCleared > 0) {
       // Classic Tetris scoring system: 40, 100, 300, 1200 per 1/2/3/4 lines
-      final Map<int,int> scoreTable = {1: 40, 2: 100, 3: 300, 4: 1200};
-      score.value += scoreTable[linesCleared] ?? (linesCleared * 50);
+      final Map<int, int> scoreTable = {1: 40, 2: 100, 3: 300, 4: 1200};
+      score.value.points += scoreTable[linesCleared] ?? (linesCleared * 50);
 
       // Update high score if necessary
-      if (score.value > highScore.value) {
-        highScore.value = score.value;
+      if (score.value.points > highScore.value) {
+        highScore.value = score.value.points;
       }
     }
 
     board.refresh();
+  }
+  
+  //get highscore from storage
+  Future<int> getHighScore() async {
+    int highScorePoints = 0;
+    List<Score>? scores = await getHighScoresUseCase.call();
+    if (scores != null && scores.isNotEmpty) {
+      highScorePoints = scores.first.points;
+    }
+    return highScorePoints;
+  }
+
+  //Score just saved if it's higher than previous high score
+  Future<void> saveHighScore() async {
+    int highScorePoints = await getHighScore();
+    if (score.value.points > highScorePoints) {
+      await saveScoreUseCase.call(score.value);
+    }
   }
 }
