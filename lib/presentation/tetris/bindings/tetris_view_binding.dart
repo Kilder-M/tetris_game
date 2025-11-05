@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tetris_game/data/data_sources/local/score_sqlite_data_source_imp.dart';
+import 'package:tetris_game/data/data_sources/score/score_data_source.dart';
 import 'package:tetris_game/data/repositories/score/score_repository_imp.dart';
 import 'package:tetris_game/data/services/sqlite_database_service.dart';
 import 'package:tetris_game/domain/repositories/score/score_repository.dart';
@@ -22,7 +23,7 @@ class TetrisViewBindings extends Bindings {
     Get.lazyPut<TetrisViewController>(() => TetrisViewController());
 
     //Data Sources
-    Get.lazyPut<ScoreSqliteDataSourceImp>(
+    Get.lazyPut<ScoreDataSource>(
       () => ScoreSqliteDataSourceImp(Get.find()),
     );
 

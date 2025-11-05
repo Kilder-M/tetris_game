@@ -163,7 +163,8 @@ class TetrisViewController extends GetxController {
     if (linesCleared > 0) {
       // Classic Tetris scoring system: 40, 100, 300, 1200 per 1/2/3/4 lines
       final Map<int, int> scoreTable = {1: 40, 2: 100, 3: 300, 4: 1200};
-      score.value.points += scoreTable[linesCleared] ?? (linesCleared * 50);
+      final newPoints = score.value.points + (scoreTable[linesCleared] ?? (linesCleared * 50));
+      score.value = score.value.copyWith(points: newPoints);
 
       // Update high score if necessary
       if (score.value.points > highScore.value) {
