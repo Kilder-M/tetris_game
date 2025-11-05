@@ -13,24 +13,28 @@ class HomeViewController extends GetxController {
     loadHighScore();
   }
 
-  //get highscore from storage
-  void loadHighScore() async {
-    List<Score>? scores = await getHighScoresUseCase.call();
+  // Load the highest score from storage
+  Future<void> loadHighScore() async {
+    final scores = await getHighScoresUseCase.call();
     if (scores != null && scores.isNotEmpty) {
       highScore.value = scores.first.points;
+    } else {
+      highScore.value = 0; // Reset if list empty
     }
   }
 
   void onStartGame() {
-    // Navigate to game view and refresh high score on return
-    Get.toNamed('/game_view')?.then((_) => loadHighScore());
+    // Navigate to game view and refresh high score when user returns
+    Get.toNamed('/game_view')!.then((_) => loadHighScore());
   }
 
   void onOpenSettings() {
     Get.toNamed('/settings');
   }
 
-  void onOpenHighScores() {
-    Get.toNamed('/highscores');
+  Future<void> onOpenHighScores() async {
+    // Wait for HighScoreView to close, then refresh
+    await Get.toNamed('/highscores');
+    await loadHighScore();
   }
 }

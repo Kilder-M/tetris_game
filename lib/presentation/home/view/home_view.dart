@@ -42,17 +42,6 @@ class HomeView extends GetView<HomeViewController> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            OutlinedButton(
-              onPressed: controller.onOpenHighScores,
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 48,
-                  vertical: 16,
-                ),
-              ),
-              child: const Text('HIGH SCORES', style: TextStyle(fontSize: 20)),
-            ),
             const SizedBox(height: 48),
             ElevatedButton(
               onPressed: controller.onStartGame,
@@ -64,6 +53,18 @@ class HomeView extends GetView<HomeViewController> {
               ),
               child: const Text('START GAME', style: TextStyle(fontSize: 20)),
             ),
+            const SizedBox(height: 16),
+            OutlinedButton(
+              onPressed: controller.onOpenHighScores,
+              style: OutlinedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 48,
+                  vertical: 16,
+                ),
+              ),
+              child: const Text('HIGH SCORES', style: TextStyle(fontSize: 20)),
+            ),
+            
             const SizedBox(height: 16),
             OutlinedButton(
               onPressed: controller.onOpenSettings,

@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
+import 'package:tetris_game/presentation/high_score/bindings/high_score_bindings.dart';
+import 'package:tetris_game/presentation/high_score/view/high_score_view.dart';
 import 'package:tetris_game/presentation/home/bindings/home_bindings.dart';
-import 'package:tetris_game/presentation/home/home_view.dart';
+import 'package:tetris_game/presentation/home/view/home_view.dart';
 import 'package:tetris_game/presentation/tetris/bindings/tetris_view_binding.dart';
 import 'package:tetris_game/presentation/tetris/view/tetris_view.dart';
 
@@ -17,10 +19,15 @@ class AppPages {
       page: () => const TetrisView(),
       binding: TetrisViewBindings(),
     ),
-     GetPage(
+    GetPage(
       name: _Paths.home,
       page: () => const HomeView(),
       binding: HomeViewBinding(),
+    ),
+    GetPage(
+      name: _Paths.highscores,
+      page: () => const HighScoresView(),
+      binding: HighScoreBindings(),
     ),
   ];
 }
