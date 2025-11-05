@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:tetris_game/domain/entities/score.dart';
 import 'package:tetris_game/domain/usecases/score/get_highscores_usecase.dart';
 
 class HomeViewController extends GetxController {
